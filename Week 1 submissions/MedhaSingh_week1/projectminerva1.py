@@ -41,12 +41,11 @@ print(article_embedding)
 
 import csv
 
-with open("article.txt", "w", encoding="utf-8") as f:
+with open("article.txt","w",encoding="utf-8") as f:
     f.write(title + "\n\n")
     f.write(article_text)
 
-with open("embeddings.csv","w") as f1:
-    w=csv.writer(f1)
-    w.writerow(["text","embedding"])
-    w.writerow([title,title_embedding.tolist()])
-    w.writerow([article_text,article_embedding.tolist()])
+with open("embeddings.csv","w",newline="",encoding="utf-8") as f1:
+    w = csv.writer(f1)
+    w.writerow(["title",title_embedding.tolist()])
+    w.writerow(["article",article_embedding.tolist()])
