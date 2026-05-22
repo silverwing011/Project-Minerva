@@ -27,8 +27,9 @@ article_tokens=word_tokenize(article_text)
 
 model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
-title_embedding=model.encode(title_tokens)
-article_embedding=model.encode(article_tokens)
+title_embedding=model.encode(title)
+article_embedding=model.encode(article_text)
+
 print(title_embedding.shape)
 print(article_embedding.shape)
 
@@ -38,14 +39,14 @@ print(title_embedding)
 print(article_tokens)
 print(article_embedding)
 
-# print(word_tokenize(title))
+import csv
 
-# print("TITLE: ")
-# print(title)
+with open("article.txt", "w", encoding="utf-8") as f:
+    f.write(title + "\n\n")
+    f.write(article_text)
 
-# print("\nARTICLE: ")
-# print(article_text)
-
-# with open("article.txt", "w", encoding="utf-8") as f:
-#     f.write(title + "\n\n")
-#     f.write(article_text)
+with open("embeddings.csv","w") as f1:
+    w=csv.writer(f1)
+    w.writerow(["text","embedding"])
+    w.writerow([title,title_embedding.tolist()])
+    w.writerow([article_text,article_embedding.tolist()])
